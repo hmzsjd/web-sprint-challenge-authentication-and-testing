@@ -4,7 +4,13 @@ const { tokenBuilder } = require('./auth-token')
 
 const User = require("../users/user-model");
 
-router.post('/register', (req, res, next) => {
+const {
+  checkUsernameExists,
+  checkUsernameFree,
+  validateData
+} = require("../middleware/auth-middleware");
+
+router.post('/register', validateData, checkUsernameFree, (req, res, next) => {
   let user = req.body;
 
   const hash = bcrypt.hashSync(user.password, 8)
@@ -47,7 +53,7 @@ router.post('/register', (req, res, next) => {
   */
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', validateData,checkUsernameExists, async (req, res, next) => {
   /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
