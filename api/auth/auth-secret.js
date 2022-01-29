@@ -1,3 +1,3 @@
 module.exports = {
-    JWT_SECRET: process.env.JWT_SECRET || 'hunter2'
-}
+  JWT_SECRET: process.env.JWT_SECRET || "hunter2",
+};
